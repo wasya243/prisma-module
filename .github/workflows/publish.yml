@@ -2,9 +2,7 @@ name: CI - Generate Prisma Client and Publish
 
 on:
   push:
-    tags:
-      - 'v*'
-
+    branches: [main]
 
 jobs:
   publish:
