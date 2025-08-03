@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "types": "index.d.ts",
-  "name": "package",
+  "name": "@vkharchenko97/simple-math-lib",
   "version": "1.0.0",
   "files": [
     "prisma",
@@ -18,8 +18,8 @@
     "generate": "prisma generate",
     "pull": "prisma db pull"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["prisma", "database"],
+  "author": "Vasyl Kharchenko",
   "license": "ISC",
-  "description": ""
+  "description": "custom prisma module"
 }
