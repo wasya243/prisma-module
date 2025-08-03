@@ -34,7 +34,9 @@ jobs:
           registry-url: https://registry.npmjs.org
       
       - name: Install netcat for readiness check
-        run: sudo apt-get update && apt-get install -y netcat-openbsd
+        run: |
+          apt-get update
+          apt-get install -y netcat-openbsd
 
       - name: Wait for DB to be ready
         run: |
