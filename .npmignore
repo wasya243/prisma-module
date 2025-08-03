@@ -1,0 +1,6 @@
+Dockerfile
+docker-compose.yml
+init.sql
+.github/
+node_modules/
+*.sh
