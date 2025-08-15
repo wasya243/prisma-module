@@ -33,26 +33,25 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org
       
-      # - name: Install netcat for readiness check
-      #   run: apt-get install -y netcat-openbsd
-
-      # - name: Wait for DB to be ready
-      #   run: |
-      #     echo "Waiting for DB..."
-      #     for i in {1..30}; do
-      #       nc -z localhost 5432 && echo "DB is ready!" && break
-      #       echo "Waiting for DB... ($i)"
-      #       sleep 1
-      #     done
-      - name: Wait for Db to be ready
-        run: sleep 10
+      
+      - name: Wait for DB to be ready
+        run: |
+          echo "Waiting for Postgres to be ready..."
+          for i in {1..30}; do
+            pg_isready -h localhost -U customer_user -d customer_db && echo "Postgres is ready!" && break
+            echo "Still waiting... ($i)"
+            sleep 2
+          done
 
       - name: Install dependencies
         run: npm install
-
-      - name: Seed database
+      
+      - name: Apply all SQL migrations
         run: |
-          PGPASSWORD=customer_password psql -h localhost -U customer_user -d customer_db -f ./init.sql
+          for file in ./migrations/*.sql; do
+            echo "Applying migration: $file"
+            PGPASSWORD=customer_password psql -h localhost -U customer_user -d customer_db -f "$file"
+          done
         env:
           PGPASSWORD: customer_password
 
