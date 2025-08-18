@@ -1,6 +1,6 @@
 Dockerfile
 docker-compose.yml
-init.sql
+migrations/
 .github/
 node_modules/
 *.sh
